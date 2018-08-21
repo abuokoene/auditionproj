@@ -1,2 +1,0 @@
-D:\Documents\Qlik\AuditionProj\AuditionProj\AuditionProj.Tests\obj\Debug\AuditionProj.Tests.csprojAssemblyReference.cache
-D:\Documents\Qlik\AuditionProj\AuditionProj\AuditionProj.Tests\obj\Debug\AuditionProj.Tests.csproj.CoreCompileInputs.cache

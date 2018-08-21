@@ -1,0 +1,19 @@
+branch-defaults:
+  default:
+    environment: AuditionProj-dev2
+    group_suffix: null
+deploy:
+  artifact: obj/Debug/Package/AuditionProj.zip
+global:
+  application_name: AuditionProj
+  branch: null
+  default_platform: IIS 10.0
+  default_region: us-east-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  repository: null
+  sc: null
+  workspace_type: Application

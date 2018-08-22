@@ -29,16 +29,22 @@ Public DNS: http://auditionproj-dev.us-east-1.elasticbeanstalk.com/
 * AWS Elastic Beanstalk Command Line Interface (eb CLI)
 
 To build the REST API application, MSBuild is used to create the deployment package
-```msbuild AuditionProj.csproj /t:Package /p:DeployIisPath="Default Web Site"```
+```
+msbuild AuditionProj.csproj /t:Package /p:DeployIisPath="Default Web Site"
+```
 
 To set up the Elastic Beanstalk CLI:
 1. Navigate to the project folder .\AuditionProj
 2. Run the 'eb init' command.
-```eb init AuditionProj --region us-east-1 --platform iis-10.0```
+```
+eb init AuditionProj --region us-east-1 --platform iis-10.0
+```
 3. Select the environment to be used with the 'eb use' command.
-```eb use AuditionProj-dev```
+```
+eb use AuditionProj-dev
+```
     - When no environment has been created previously, run `eb create AuditionProj-dev --single` to create an environment with no load balancers.
-4. Open the config.yml file located at .\AuditionProj\.elasticbeanstalk\config.yml and add the following lines
+4. Open the config.yml file located at .\AuditionProj\\.elasticbeanstalk\config.yml and add the following lines
 ```
 deploy:
     artifact: obj/Debug/Package/AuditionProj.zip
@@ -51,12 +57,7 @@ deploy:
 * URL: api/Message
 * Method: GET
 * URL Parameters: None
-* Data Parameters:
-    ```json
-    {
-        "MessageContent": [string]
-    }
-    ```
+* Data Parameters: None
 * Success Response:
     - Status Code: 200 OK
     - Content-type: application/json; charset=utf-8
@@ -74,4 +75,79 @@ deploy:
         }]
         ```
 * Sample Call: 
-    ```curl -X GET -H 'Content-Type: application/json' -i 'http://auditionproj-dev.us-east-1.elasticbeanstalk.com/api/Message'```
+    ```
+    curl -X GET -H 'Content-Type: application/json' -i 'http://auditionproj-dev.us-east-1.elasticbeanstalk.com/api/Message'
+    ```
+
+### Get a specific Message
+* URL: api/Message/ID
+* Method: GET
+* URL Parameters: ID=[integer]
+* Data Parameters: None
+* Success Response:
+    - Status Code: 200 OK
+    - Content-type: application/json; charset=utf-8
+    - Sample content:
+        ```json
+        [{
+            "ID": 1,
+            "MessageContent": "test",
+            "IsPalindrome": false
+        }]
+        ```
+* Sample Call: 
+    ```
+    curl -X GET -H 'Content-Type: application/json' -i 'http://auditionproj-dev.us-east-1.elasticbeanstalk.com/api/Message/1'
+    ```
+
+### Submit a Message
+* URL: api/Message
+* Method: POST
+* URL Parameters: None
+* Data Parameters:
+    ```json
+    {
+        "MessageContent": [string]
+    }
+    ```
+* Success Response:
+    - Status Code: 204 No Content
+    - Content-type: application/json; charset=utf-8
+    - Sample content: None
+* Sample Call: 
+    ```
+    curl -X POST -H 'Content-Type: application/json' -i 'http://auditionproj-dev.us-east-1.elasticbeanstalk.com/api/Message' --data '{ "MessageContent": "test" }'
+    ```
+
+### Delete a Message
+* URL: api/Message/ID
+* Method: DELETE
+* URL Parameters: ID=[integer]
+* Data Parameters: None
+* Success Response:
+    - Status Code: 204 No Content
+    - Content-type: application/json; charset=utf-8
+    - Sample content: None
+* Sample Call: 
+    ```
+    curl -X DELETE -H 'Content-Type: application/json' -i 'http://auditionproj-dev.us-east-1.elasticbeanstalk.com/api/Message/1'
+    ```
+
+### Update a Message
+* URL: api/Message/ID
+* Method: PUT
+* URL Parameters: ID=[integer]
+* Data Parameters:
+    ```json
+    {
+        "MessageContent": [string]
+    }
+    ```
+* Success Response:
+    - Status Code: 204 No Content
+    - Content-type: application/json; charset=utf-8
+    - Sample content: None
+* Sample Call: 
+    ```
+    curl -X PUT -H 'Content-Type: application/json' -i 'http://auditionproj-dev.us-east-1.elasticbeanstalk.com/api/Message/1' --data '{ "MessageContent": "test" }'
+    ```

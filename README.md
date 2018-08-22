@@ -9,12 +9,24 @@
 * Database: To store messages submitted.
     - SQL Server Express Edition 14.00.3015.40.v1
     - Database instance set up with AWS RDS
-    - Endpoint: qlikmessagedb.cjf458mpgsxw.us-east-1.rds.amazonaws.com
 * Client UI: To save and retrieve messages
     - HTML\CSS with JQuery 3.3.1
     - IIS 10.0
+    
+### Database Architecture
+* DB Instance: qlikmessagedb
+* Endpoint: qlikmessagedb.cjf458mpgsxw.us-east-1.rds.amazonaws.com
+* Table: dbo.messageTable
+
+| Column           | Datatype        | Description                          |
+| ---------------- | --------------- | ------------------------------------ |
+| ID               | int             | Unique ID                            |
+| MessageContent   | nvarchar(MAX)   | message content                      |
+| isPalindrome     | bit             | 0 = not palindrome, 1 = palindrome   | 
 
 ## Sequence Diagram
+
+![sequence diagram](https://user-images.githubusercontent.com/39939964/44486224-f5ee4e80-a620-11e8-96af-cedefdc78035.jpg)
 
 ## Application Deployment
 
@@ -178,3 +190,7 @@ Public DNS: http://auditionproj-dev.us-east-1.elasticbeanstalk.com/
     ```
     curl -X PUT -H 'Content-Type: application/json' -i 'http://auditionproj-dev.us-east-1.elasticbeanstalk.com/api/Message/1' --data '{ "MessageContent": "test" }'
     ```
+
+## To-DO
+* Deploy application to a docker container
+- Requirement: Windows 10 Pro or Enterprise Edition

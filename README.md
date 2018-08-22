@@ -16,6 +16,8 @@
 
 ## Sequence Diagram
 
+![sequence diagram](https://user-images.githubusercontent.com/39939964/44486224-f5ee4e80-a620-11e8-96af-cedefdc78035.jpg)
+
 ## Application Deployment
 
 * The application was built on a Windows 10 environment.

@@ -1,7 +1,5 @@
 # Qlik Audition Project
 
-Public DNS: http://auditionproj-dev.us-east-1.elasticbeanstalk.com/
-
 ## Implementation Architecture
 
 * Server: REST API Implementation
@@ -14,6 +12,7 @@ Public DNS: http://auditionproj-dev.us-east-1.elasticbeanstalk.com/
     - Endpoint: qlikmessagedb.cjf458mpgsxw.us-east-1.rds.amazonaws.com
 * Client UI: To save and retrieve messages
     - HTML\CSS with JQuery 3.3.1
+    - IIS 10.0
 
 ## Sequence Diagram
 
@@ -26,8 +25,9 @@ Public DNS: http://auditionproj-dev.us-east-1.elasticbeanstalk.com/
 * Microsoft Visual Studio 2017
     - Microsoft Visual Studio Build Tools with MSBuild can also be used to build the application
 * .NET Framework 4.6.1
-* AWS Elastic Beanstalk Command Line Interface (eb CLI)
+* AWS Elastic Beanstalk Command Line Interface (eb CLI) for deploying the application to AWS.
 
+### Building and Deploying the server
 To build the REST API application, MSBuild is used to create the deployment package
 ```
 msbuild AuditionProj.csproj /t:Package /p:DeployIisPath="Default Web Site"
@@ -43,7 +43,7 @@ eb init AuditionProj --region us-east-1 --platform iis-10.0
 ```
 eb use AuditionProj-dev
 ```
-    - When no environment has been created previously, run `eb create AuditionProj-dev --single` to create an environment with no load balancers.
+Note: When no environment has been created previously, run `eb create AuditionProj-dev --single` to create an environment with no load balancers.
 4. Open the config.yml file located at .\AuditionProj\\.elasticbeanstalk\config.yml and add the following lines
 ```
 deploy:
@@ -51,7 +51,34 @@ deploy:
 ```
 5. Deploy the application by running `eb deploy`.
 
+### Building and Deploying the Client
+To build the Client application, MSBuild is used to create the deployment package
+```
+msbuild AuditionWeb.csproj /t:Package /p:DeployIisPath="Default Web Site"
+```
+
+To set up the Elastic Beanstalk CLI:
+1. Navigate to the project folder .\AuditionWeb
+2. Run the 'eb init' command.
+```
+eb init AuditionWeb --region us-east-1 --platform iis-10.0
+```
+3. Select the environment to be used with the 'eb use' command.
+```
+eb use AuditionWeb-dev
+```
+Note: When no environment has been created previously, run `eb create AuditionWeb-dev --single` to create an environment with no load balancers.
+4. Open the config.yml file located at .\AuditionWeb\\.elasticbeanstalk\config.yml and add the following lines
+```
+deploy:
+    artifact: obj/Debug/Package/AuditionWeb.zip
+```
+5. Deploy the application by running `eb deploy`
+6. To access the client, go to http://auditionweb-dev.3uvkwj8h7u.us-east-1.elasticbeanstalk.com/
+
 ## REST API Documentation
+
+Public DNS: http://auditionproj-dev.us-east-1.elasticbeanstalk.com/
 
 ### Get All Messages
 * URL: api/Message

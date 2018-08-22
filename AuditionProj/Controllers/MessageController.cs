@@ -26,7 +26,7 @@ namespace AuditionProj.Controllers
             MessageModel message = messagePersistence.GetMessage(id);
 
             if (message.MessageContent == null)
-                return null;
+                return new MessageModel();
             else
                 return message;
         }

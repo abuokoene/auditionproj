@@ -19,8 +19,10 @@ namespace AuditionProj
             };
         }
 
+        //Checks if submitted message is a palindrome before saving to db
         public void SaveMessage(MessageModel message)
         {
+            //Check if the message is a palindrome before saving to db
             message.IsPalindrome = CheckIfIsPalindrome(message.MessageContent);
 
             string command = "INSERT into [dbo].[messageTable] (messageContent, isPalindrome) values(@messageContent, @isPalindrome)";
@@ -40,6 +42,7 @@ namespace AuditionProj
             conn.Close();
         }
 
+        //Retrieves all saved messages from the db
         public List<MessageModel> GetMessages()
         {
             string command = "SELECT * from [dbo].[messageTable]";
@@ -54,6 +57,7 @@ namespace AuditionProj
             };
             using (SqlDataReader rd = adapter.InsertCommand.ExecuteReader())
             {
+                //Add messages to the list while there are still messages to be read
                 while (rd.Read())
                 {
                     MessageModel msg = new MessageModel();
@@ -70,6 +74,7 @@ namespace AuditionProj
             return messages;
         }
 
+        //Retrieves specific message with given id
         public MessageModel GetMessage(int id)
         {
             string command = "SELECT * from [dbo].[messageTable] where ID = @ID";
@@ -98,6 +103,7 @@ namespace AuditionProj
             return message;
         }
 
+        //Deletes specific message with given id
         public void DeleteMessage(int id)
         {
             string command = "DELETE from [dbo].[messageTable] where ID = @ID";
@@ -115,6 +121,7 @@ namespace AuditionProj
             conn.Close();
         }
 
+        //Updates specific message with given id
         public void UpdateMessage(int id, MessageModel message)
         {
             message.IsPalindrome = CheckIfIsPalindrome(message.MessageContent);
@@ -136,6 +143,7 @@ namespace AuditionProj
             conn.Close();
         }
 
+        //Determines if a given string is a palindrome
         private bool CheckIfIsPalindrome(string text)
         {
             char[] textArray = text.ToLower().ToArray();

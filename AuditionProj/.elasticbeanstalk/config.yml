@@ -1,6 +1,6 @@
 branch-defaults:
   default:
-    environment: AuditionProj-dev2
+    environment: AuditionProj-dev
     group_suffix: null
 deploy:
   artifact: obj/Debug/Package/AuditionProj.zip

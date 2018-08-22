@@ -190,3 +190,7 @@ Public DNS: http://auditionproj-dev.us-east-1.elasticbeanstalk.com/
     ```
     curl -X PUT -H 'Content-Type: application/json' -i 'http://auditionproj-dev.us-east-1.elasticbeanstalk.com/api/Message/1' --data '{ "MessageContent": "test" }'
     ```
+
+## To-DO
+* Deploy application to a docker container
+- Requirement: Windows 10 Pro or Enterprise Edition

@@ -9,10 +9,20 @@
 * Database: To store messages submitted.
     - SQL Server Express Edition 14.00.3015.40.v1
     - Database instance set up with AWS RDS
-    - Endpoint: qlikmessagedb.cjf458mpgsxw.us-east-1.rds.amazonaws.com
 * Client UI: To save and retrieve messages
     - HTML\CSS with JQuery 3.3.1
     - IIS 10.0
+    
+### Database Architecture
+* DB Instance: qlikmessagedb
+* Endpoint: qlikmessagedb.cjf458mpgsxw.us-east-1.rds.amazonaws.com
+* Table: dbo.messageTable
+
+| Column           | Datatype        | Description                          |
+| ---------------- | --------------- | ------------------------------------ |
+| ID               | int             | Unique ID                            |
+| MessageContent   | nvarchar(MAX)   | message content                      |
+| isPalindrome     | bit             | 0 = not palindrome, 1 = palindrome   | 
 
 ## Sequence Diagram
 

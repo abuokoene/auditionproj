@@ -29,7 +29,9 @@ Public DNS: http://auditionproj-dev.us-east-1.elasticbeanstalk.com/
 * AWS Elastic Beanstalk Command Line Interface (eb CLI)
 
 To build the REST API application, MSBuild is used to create the deployment package
-'''msbuild AuditionProj.csproj /t:Package /p:DeployIisPath="Default Web Site"'''
+'''
+msbuild AuditionProj.csproj /t:Package /p:DeployIisPath="Default Web Site"
+'''
 
 To set up the Elastic Beanstalk CLI:
 1. Navigate to the project folder .\AuditionProj
